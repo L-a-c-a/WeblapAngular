@@ -1,17 +1,7 @@
 <div>
   <select [(ngModel)]="muv">
     <option value="konf">körny</option>
-    <option>lap</option>
+    <option value="lap">lap</option>
   </select>
 </div>
-<div *ngIf="muv=='lap'">
-  <app-lap></app-lap>
-</div>
-<div>
-  <button (click)="kuld()">hagymennyen</button>
-<div *ngIf="httpValasz.body">
-  <pre>{{valaszStringified()}}</pre>
-</div>
-<div class="hiba" *ngIf="hibauz.status">
-  <pre>{{hibauzStringified()}}</pre>
-</div>
+<app-kuld [muv]="muv"></app-kuld>

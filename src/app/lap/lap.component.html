@@ -1,4 +1,6 @@
-<label>url <input [(ngModel)]="_kozos.url"/></label>
-<select [(ngModel)]="_kozos.tip">
-  <option *ngFor="let t of _kozos.tipusok">{{t}}</option>
-</select>
+<div>
+  <label>url <input [(ngModel)]="_kozos.url"/></label>
+  <select [(ngModel)]="_kozos.tip" (change)="tipValtozott()">
+    <option *ngFor="let t of _kozos.tipusok">{{t}}</option>
+  </select>
+</div>

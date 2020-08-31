@@ -1,0 +1,14 @@
+<div *ngIf="muv=='lap'">
+  <app-lap (kuldeni)="kuld()"></app-lap>
+</div>
+<app-se *ngIf="_kozos.tip=='se'" [azon]="azon"></app-se>
+<div>
+  <button (click)="kuld()">hagymennyen</button>
+<div *ngIf="_kozos.httpValasz.body">
+  <pre>{{valaszStringified()}}</pre>
+</div>
+<div class="hiba" *ngIf="_kozos.hibauz.status">
+  <pre style="white-space: pre-wrap;">{{_kozos.hibauz.error}}</pre>
+  <pre style="white-space: pre-wrap;">{{hibauzStringified()}}</pre>
+</div>
+

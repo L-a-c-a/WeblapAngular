@@ -1,0 +1,16 @@
+<div>
+  <label>Forrás<input type="radio" name="semuv" (click)="semuv='html'"></label>
+  <button (click)="frissit('html')">frissít</button>
+  <label>Kép<input type="radio" name="semuv" (click)="semuv='kep'"></label>
+  <button (click)="frissit('kep')">frissít</button>
+</div>
+<!--
+{{_kozos.se}}
+{{jsonstringify(_kozos.se)}}
+{{'data:image='+_kozos.se['kep']['tip']+';'+_kozos.se['kep']['kodolas']+' '+_kozos.se['kep']['tartalom']}}
+{{imgURL()}}
+-->
+<div>
+  <iframe [srcdoc]="_kozos.se.html" *ngIf="semuv=='html'"></iframe>
+  <img [src]="imgURL()" *ngIf="semuv=='kep'">
+</div>
