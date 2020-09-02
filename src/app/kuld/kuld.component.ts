@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { KornyService } from '../korny.service'
 import { KozosService } from '../kozos.service'
 import { HttpClient, HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { LapValaszObj } from '../feszek'
 
 @Component({
   selector: 'app-kuld',
@@ -31,13 +32,11 @@ export class KuldComponent implements OnInit
     ( data =>
       { console.log({ kiir: "én", muv: this.muv, tart: data })  //hiba esetén ki sem íródik
         this._kozos.httpValasz = data
-        //** */ console.log(this.httpValasz.body["html"])
-        //if (this.httpValasz.body["html"]) this._kozos.se.html = this.httpValasz.body["html"]
-        //if (this.httpValasz.body["kep"]) this._kozos.se.kep = this.httpValasz.body["kep"]
-        let v = this._kozos.httpValasz.body
-        let va = v["a"] ? v["a"] : v   //megszívattam magam a többféle case class-'al
-        this._kozos.se = { html: va["html"], kep: va["kep"] }
-        this.azon = v["azon"]
+        //let v = this._kozos.httpValasz.body
+        //let va = v["a"] ? v["a"] : v   //megszívattam magam a többféle case class-'al
+        //this._kozos.se = { html: va["html"], kep: va["kep"] }
+        this._kozos.se = this._kozos.httpValasz.body as LapValaszObj
+        this.azon = this._kozos.se["azon"]
         /** */ console.log(this._kozos.se)
       }
     , err =>

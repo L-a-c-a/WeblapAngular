@@ -1,0 +1,6 @@
+<div>
+  <label><input [(ngModel)]="reszlNyitva" type="checkbox"/>{{_kozos.se.altip}} részletei <code>[{{reszlNyitvaJelzoFn()}}]</code></label>
+  <div *ngIf="reszlNyitva">{{_kozos.stringified(kepessegek)}}</div>
+  <div><button (click)="drMuv('csuk')">csuk</button></div>
+</div>
+

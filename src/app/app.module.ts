@@ -8,6 +8,7 @@ import { KonfComponent } from './konf/konf.component';
 import { LapComponent } from './lap/lap.component';
 import { KuldComponent } from './kuld/kuld.component';
 import { SeComponent } from './se/se.component';
+import { SeDRComponent } from './se-dr/se-dr.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { SeComponent } from './se/se.component';
     KonfComponent,
     LapComponent,
     KuldComponent,
-    SeComponent
+    SeComponent,
+    SeDRComponent
   ],
   imports: [
     BrowserModule
