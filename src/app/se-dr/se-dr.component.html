@@ -1,6 +1,9 @@
 <div>
-  <label><input [(ngModel)]="reszlNyitva" type="checkbox"/>{{_kozos.se.altip}} részletei <code>[{{reszlNyitvaJelzoFn()}}]</code></label>
-  <div *ngIf="reszlNyitva">{{_kozos.stringified(kepessegek)}}</div>
+  <div>Selenium böngésző ({{_kozos.se.altip}})</div>
+  <label><input [ngModel]="kepesNyitva" (ngModelChange)="kepesNyitva=$event; kepes($event)" type="checkbox"/> Képességek <code>[{{kepesNyitvaJelzoFn()}}]</code></label>
+  <div *ngIf="kepesNyitva">{{_kozos.stringified(kepessegek)}}</div>
+  <div>{{_kozos.stringified(valasz)}}</div>
+  <div><button (click)="drMuv('ablak')">ablakok</button></div>
   <div><button (click)="drMuv('csuk')">csuk</button></div>
 </div>
 
