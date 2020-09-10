@@ -1,5 +1,8 @@
 <div>
-  <label>url <input [(ngModel)]="_kozos.url"/></label>
+  <label>url <input list="urllist" [(ngModel)]="_kozos.url"/></label>
+  <datalist id="urllist">
+    <option value="http://localhost"></option>
+  </datalist>
   <select [(ngModel)]="_kozos.tip" (change)="tipValtozott()">
     <option *ngFor="let t of _kozos.tipusok">{{t}}</option>
   </select>

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { LapValaszObj } from './feszek'
+import { KornyService } from './korny.service'
 
 @Injectable({
   providedIn: 'root'
@@ -30,5 +31,25 @@ export class KozosService
 
   stringified(o:object) { return JSON.stringify(o, undefined, 2) }
 
-  constructor() { }
+  httpHivGET (relURL:string, utana:()=>void = ()=>{})
+  {
+    this.httpValasz = new HttpResponse<Object>()
+    this.hibauz = new HttpErrorResponse({})
+    this.http.get(this._korny.backendURL+relURL, {observe: "response"})
+    .subscribe
+    ( data =>
+      { console.log({ kiir: "én", url: this._korny.backendURL+relURL, tart: data })  //hiba esetén ide el se jut
+        this.httpValasz = data  //kuld komponensben megjelenik
+        utana()
+      }
+    , err =>
+      { console.log({ uz: "hiba van!", tart: err })
+        this.hibauz = err  //kuld komponensben megjelenik
+      }
+    , () => console.log({ kiir: "én", tart: "_kozos.httpHivGET lement" })
+    )
+
+  }
+
+  constructor(private http: HttpClient, private _korny: KornyService) { }
 }

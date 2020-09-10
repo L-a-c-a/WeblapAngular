@@ -9,6 +9,7 @@ import { LapComponent } from './lap/lap.component';
 import { KuldComponent } from './kuld/kuld.component';
 import { SeComponent } from './se/se.component';
 import { SeDRComponent } from './se-dr/se-dr.component';
+import { SeDrAblakComponent } from './se-dr-ablak/se-dr-ablak.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { SeDRComponent } from './se-dr/se-dr.component';
     LapComponent,
     KuldComponent,
     SeComponent,
-    SeDRComponent
+    SeDRComponent,
+    SeDrAblakComponent
   ],
   imports: [
     BrowserModule

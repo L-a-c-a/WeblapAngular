@@ -1,0 +1,16 @@
+<div>
+  <p>{{ablAzon}} {{aktE ? "*" : ""}}</p>
+
+  <div *ngIf="aktE; else nemAkt">
+    <button (click)="{}" [disabled]="true" >&lt;&lt; vissza</button>
+    <button (click)="{}">előre &gt;&gt;</button>
+    <button (click)="{}">csuk</button>
+    <button (click)="{}">új</button>
+  </div>
+  <!--else-->
+  <ng-template #nemAkt>
+    <button (click)="{}">idekapcsol</button>
+    <button (click)="{}">csuk</button>
+  </ng-template>
+
+</div>
