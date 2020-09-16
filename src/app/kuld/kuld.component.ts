@@ -37,13 +37,14 @@ export class KuldComponent implements OnInit
         //this._kozos.se = { html: va["html"], kep: va["kep"] }
         this._kozos.se = this._kozos.httpValasz.body as LapValaszObj
         this.azon = this._kozos.se["azon"]
+        this._kozos.kuldKeszErtesit(this.azon)
         /** */ console.log(this._kozos.se)
       }
     , err =>
       { console.log({ uz: "hiba van!", tart: err })
         this._kozos.hibauz = err
       }
-    , () => console.log({ kiir: "én", tart: "konf lement" })
+    , () => console.log({ kiir: "én", tart: "kuld lement" })
     )
 
   }

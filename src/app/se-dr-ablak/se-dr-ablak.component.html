@@ -2,10 +2,19 @@
   <p>{{ablAzon}} {{aktE ? "*" : ""}}</p>
 
   <div *ngIf="aktE; else nemAkt">
-    <button (click)="{}" [disabled]="true" >&lt;&lt; vissza</button>
-    <button (click)="{}">előre &gt;&gt;</button>
-    <button (click)="{}">csuk</button>
-    <button (click)="{}">új</button>
+    <table>
+      <tr *ngFor="let lap of statusz | keyvalue" data-megj="***ÚJ DOLOG*** ngFor objektumra">
+        <td>{{lap.key}}{{lap.key==histAkt ? "*" : ""}}</td>
+        <td>{{lap.value.url}}</td>
+        <td>{{lap.value.cim}}</td>
+      </tr>
+    </table>
+    <button (click)="navig(-1)" [disabled]="histAkt==1" >&lt;&lt; vissza</button>
+    <button (click)="navig(0)">frissít</button>
+    <button (click)="navig(1)" [disabled]="histAkt==histHossz" >előre &gt;&gt;</button>
+    <button (click)="{}" [disabled]="true" >csuk</button>
+    <button (click)="{}" [disabled]="true" >új</button>
+    <button (click)="ablakStatusz()">státusz</button>
   </div>
   <!--else-->
   <ng-template #nemAkt>

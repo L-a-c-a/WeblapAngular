@@ -1,10 +1,11 @@
 <div *ngIf="muv=='lap'">
   <app-lap (kuldeni)="kuld()"></app-lap>
 </div>
+<div data-Megj="csak hogy meglegyen a színe">
+  <button (click)="kuld()">hagymennyen</button>
+</div>
 <app-se-dr *ngIf="_kozos.se && _kozos.se.altip"></app-se-dr>  <!-- kell a _kozos.se && , mert van, hogy még üres -->
 <app-se *ngIf="_kozos.tip=='se'" [azon]="azon"></app-se>
-<div>
-  <button (click)="kuld()">hagymennyen</button>
 <div *ngIf="_kozos.httpValasz.body">
   <pre>{{valaszStringified()}}</pre>
 </div>

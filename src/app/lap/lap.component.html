@@ -2,6 +2,9 @@
   <label>url <input list="urllist" [(ngModel)]="_kozos.url"/></label>
   <datalist id="urllist">
     <option value="http://localhost"></option>
+    <option value="https://www.pontosido.com/"></option>
+    <option value="file:///tmp"></option>
+    <option value="http://macsed.csillagpark.hu/z650.htm"></option>
   </datalist>
   <select [(ngModel)]="_kozos.tip" (change)="tipValtozott()">
     <option *ngFor="let t of _kozos.tipusok">{{t}}</option>

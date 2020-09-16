@@ -12,7 +12,14 @@ export interface LapValaszObj
   }
 , tip: string
 , altip: string
+, egyeb?: any
 //...?
 }
+
+export interface AblakStatuszObj
+{ url?: string
+, cim?: string
+, akt?: string
+}   //vagy url és cim van, vagy akt
 
 //lesz itt még talán több is
