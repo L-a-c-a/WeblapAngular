@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { KozosService } from '../kozos.service'
 import { LapValaszObj, AblakStatuszObj } from '../feszek'
 import { Subscription } from 'rxjs'
@@ -13,6 +13,8 @@ export class SeDrAblakComponent implements OnInit
   @Input() abl:object   // {azon: "valami"} , "valami" = "akt" vagy üres
   ablAzon:string  //itt még korai abl-ból inicializálni, nincs értéke - ngOnInit-ben kell
   aktE:boolean    //"akt"-e?
+  @Output() frissiteni = new EventEmitter()
+  ablakok = []
 
   statusz: AblakStatuszObj[] = []     // { <sorsz>: {url: <url>, cim: <cim>} }     vagy { 0: {akt: <sorsz>}} . de az nem sokáig
   histAkt: number = 1
@@ -45,6 +47,17 @@ export class SeDrAblakComponent implements OnInit
               this.histHossz = this._kozos.se.egyeb["histHossz"]
             }
       )
+  }
+
+  valt()
+  {
+    this._kozos.httpHivGET
+    ( "drmuv?muv=ablakvalt&abl="+this.ablAzon
+    , () => {
+              this.ablakok = this._kozos.httpValasz.body as []
+              this.frissiteni.emit(this.ablakok)
+            }
+    )
   }
 
   feliratkozas: Subscription

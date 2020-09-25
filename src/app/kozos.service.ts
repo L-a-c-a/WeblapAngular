@@ -53,7 +53,7 @@ export class KozosService
   }
 
 /*** ÚJ DOLOG */
-  private _kuldKesz = new BehaviorSubject<string>("semmi");  //ha csak Subject, előszörre nem küldődik el
+  private _kuldKesz = new /**/BehaviorSubject<string>("semmi");  //ha csak Subject, előszörre nem küldődik el
   kuldKesz$ = this._kuldKesz.asObservable()
   kuldKeszErtesit(s:string) { this._kuldKesz.next(s)}
 
