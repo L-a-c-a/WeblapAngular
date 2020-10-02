@@ -20,6 +20,7 @@ export interface AblakStatuszObj
 { url?: string
 , cim?: string
 , akt?: string
-}   //vagy url és cim van, vagy akt
+, abl?: string
+}   //vagy url és cim van, vagy akt és abl
 
 //lesz itt még talán több is

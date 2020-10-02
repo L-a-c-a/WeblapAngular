@@ -3,22 +3,24 @@
 
   <div *ngIf="aktE; else nemAkt">
     <table>
-      <tr *ngFor="let lap of statusz | keyvalue" data-megj="***ÚJ DOLOG*** ngFor objektumra">
-        <td>{{lap.key}}{{lap.key==histAkt ? "*" : ""}}</td>
-        <td>{{lap.value.url}}</td>
-        <td>{{lap.value.cim}}</td>
+      <tr *ngFor="let lap of _seKozos.statusz | keyvalue" data-megj="***ÚJ DOLOG*** ngFor objektumra">
+        <ng-container *ngIf="+lap.key">
+          <td>{{lap.key}}{{lap.key==_seKozos.histAkt ? "*" : ""}}</td>
+          <td>{{lap.value.url}}</td>
+          <td>{{lap.value.cim}}</td>
+        </ng-container>
       </tr>
     </table>
-    <button (click)="navig(-1)" [disabled]="histAkt==1" >&lt;&lt; vissza</button>
-    <button (click)="navig(0)">frissít</button>
-    <button (click)="navig(1)" [disabled]="histAkt==histHossz" >előre &gt;&gt;</button>
+    <button (click)="navig(-1)" [disabled]="_seKozos.histAkt<2" >&lt;&lt; vissza</button>
+    <button (click)="navig(0)" [disabled]="_seKozos.histAkt==0" >frissít</button>
+    <button (click)="navig(1)" [disabled]="_seKozos.histAkt==_seKozos.histHossz" >előre &gt;&gt;</button>
     <button (click)="{}" [disabled]="true" >csuk</button>
     <button (click)="{}" [disabled]="true" >új</button>
     <button (click)="ablakStatusz()">státusz</button>
   </div>
   <!--else-->
   <ng-template #nemAkt>
-    <button (click)="valt()">idekapcsol</button>
+    <button (click)="valtani.emit(ablAzon)">idekapcsol</button>
     <button (click)="{}">csuk</button>
   </ng-template>
 

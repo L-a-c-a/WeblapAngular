@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { KornyService } from '../korny.service'
 import { KozosService } from '../kozos.service'
+import { SeKozosService } from '../se-kozos.service'
 import { HttpClient, HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { AblakStatuszObj } from '../feszek';
 
 @Component({
   selector: 'app-se-dr',
@@ -18,7 +20,7 @@ export class SeDRComponent implements OnInit
 
   kepessegek = {}  //RemoteWebDriver.getCapabilities
 
-  ablakok = []
+  //ablakok = []    ld. seKözös
 
   kepes(e: boolean) 
   { //** */    console.log("érték="+e)
@@ -30,9 +32,39 @@ export class SeDRComponent implements OnInit
     }
   }
 
-  ablak() { this.drMuv("ablak", ()=>{this.ablakok = this.valasz as []/**;console.log("utána");console.log(this.ablakok)/**/}) }
+  ablak() { this.drMuv("ablak", ()=>{this._seKozos.ablakokFrissit(this.valasz as [])}) }
 
-  ujAblak() { this.drMuv("ujablak", ()=>{this.ablakok = this.valasz as []}) }
+  ujAblak()  { this.drMuv("ujablak", ()=>{this._seKozos.ablakokFrissit(this.valasz as [])}) }
+  /*
+  { this.drMuv("ujablak"
+              , ()=>{
+                      this._seKozos.ablakok = this.valasz as []
+                      let historia =  Object.values(this._seKozos.ablakok.filter(e=>Object.values(e).toString()!="")[0])[0] as AblakStatuszObj[]
+                      /* * /console.log(historia)
+                      this._seKozos.statuszFrissit(historia)
+                    }
+              ) 
+  }
+  */
+
+  valt(ablAzon: string)
+  {
+    this._kozos.httpHivGET
+    ( "drmuv?muv=ablakvalt&abl="+ablAzon
+    , () => {
+              //this._seKozos.ablakok = this._kozos.httpValasz.body as []
+              ///* */console.log("valt: ablAzon="+ablAzon)
+              ///* */console.log(this._seKozos.ablakok)
+              ////this._seKozos.statuszFrissit(this.ablakok[ablAzon])  //nem jó, mert tömb, és nem az azon az indexe, hanem 0,1,2... de kicseszünk vele:
+              ////let historia = this.ablakok.filter(e=>ablAzon in e)[0][ablAzon]
+              //// vagy így:
+              //let historia = Object.assign({}, ...this._seKozos.ablakok)[ablAzon]
+              ///* */console.log(historia)
+              //this._seKozos.statuszFrissit(historia)
+              this._seKozos.ablakokFrissit(this._kozos.httpValasz.body as [])
+            }
+    )
+  }
 
   drMuv(muv:string, utana:()=>void = ()=>{})
   {
@@ -49,7 +81,7 @@ export class SeDRComponent implements OnInit
         if (this.valasz[this._kozos.tip] == "csukva")   //ezt muv=csuk -ra válaszolja // lehet, hogy ide switch fog kelleni
         {
           this._kozos.tip = "lap"  // se komponens tűnjön el
-          this._kozos.se.altip = ""   // se-dr komponens tűnjön el
+          this._seKozos.se.altip = ""   // se-dr komponens tűnjön el
           this._kozos.httpValasz = data  //megjeleníti a kuld (a se-dr helyett)
         }
         utana()
@@ -62,7 +94,7 @@ export class SeDRComponent implements OnInit
     )
   }
 
-  constructor(private http: HttpClient, private _korny: KornyService, public _kozos: KozosService) { }
+  constructor(private http: HttpClient, private _korny: KornyService, public _kozos: KozosService, public _seKozos: SeKozosService) { }
 
   ngOnInit(): void { this.ablak() }
 

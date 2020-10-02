@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { KornyService } from '../korny.service'
 import { KozosService } from '../kozos.service'
+import { SeKozosService } from '../se-kozos.service'
 import { HttpClient, HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { LapValaszObj } from '../feszek'
 
@@ -12,12 +13,13 @@ import { LapValaszObj } from '../feszek'
 export class KuldComponent implements OnInit 
 {
   @Input() muv: string
-  azon = ""
+  //azon = ""
 
   //httpValasz: HttpResponse<Object> = new HttpResponse<Object>()
   //hibauz: HttpErrorResponse = new HttpErrorResponse({})
   //valaszStringified() { return JSON.stringify(this.httpValasz.body, undefined, 2) }
   //hibauzStringified() { return JSON.stringify(this.hibauz, undefined, 2) }
+  /*
   valaszStringified() { return JSON.stringify(this._kozos.httpValasz.body, undefined, 2) }
   hibauzStringified() { return JSON.stringify(this._kozos.hibauz, undefined, 2) }
 
@@ -35,10 +37,10 @@ export class KuldComponent implements OnInit
         //let v = this._kozos.httpValasz.body
         //let va = v["a"] ? v["a"] : v   //megszívattam magam a többféle case class-'al
         //this._kozos.se = { html: va["html"], kep: va["kep"] }
-        this._kozos.se = this._kozos.httpValasz.body as LapValaszObj
-        this.azon = this._kozos.se["azon"]
-        this._kozos.kuldKeszErtesit(this.azon)
-        /** */ console.log(this._kozos.se)
+        this._seKozos.se = this._kozos.httpValasz.body as LapValaszObj
+        this.azon = this._seKozos.se["azon"]
+        //this._kozos.kuldKeszErtesit(this.azon)
+        /** / console.log(this._seKozos.se)
       }
     , err =>
       { console.log({ uz: "hiba van!", tart: err })
@@ -46,10 +48,25 @@ export class KuldComponent implements OnInit
       }
     , () => console.log({ kiir: "én", tart: "kuld lement" })
     )
-
+  }
+*/
+  kuld(): void 
+  {
+    this._kozos.httpHivGET
+    ( `${this.muv}?url=${this._kozos.url ? this._kozos.url : ""}&tip=${this._kozos.tip ? this._kozos.tip : ""}`
+    , () =>
+      {
+        if (this._kozos.tip=='se')
+        {
+          this._seKozos.se = this._kozos.httpValasz.body as LapValaszObj
+          /** */ console.log(this._seKozos.se)
+          this._seKozos.statuszFrissit(this._seKozos.se.egyeb)
+        }
+      }
+    )
   }
 
-  constructor(private http: HttpClient, private _korny: KornyService, public _kozos: KozosService) { }
+  constructor(private http: HttpClient, private _korny: KornyService, public _kozos: KozosService, public _seKozos: SeKozosService) { }
 
   ngOnInit(): void { this.kuld() }
 

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse, HttpErrorResponse } from '@angular/common/http';
-import { LapValaszObj } from './feszek'
 import { KornyService } from './korny.service'
 import { Subject, BehaviorSubject } from "rxjs";
 
@@ -22,8 +21,6 @@ export class KozosService
   , "se"  //Selenium
   ]
   tip: string
-
-  se:LapValaszObj
 
   httpValasz: HttpResponse<Object> = new HttpResponse<Object>()
   hibauz: HttpErrorResponse = new HttpErrorResponse({})
@@ -53,9 +50,9 @@ export class KozosService
   }
 
 /*** ÚJ DOLOG */
-  private _kuldKesz = new /**/BehaviorSubject<string>("semmi");  //ha csak Subject, előszörre nem küldődik el
-  kuldKesz$ = this._kuldKesz.asObservable()
-  kuldKeszErtesit(s:string) { this._kuldKesz.next(s)}
+  //private _kuldKesz = new /**/BehaviorSubject<string>("semmi");  //ha csak Subject, előszörre nem küldődik el
+  //kuldKesz$ = this._kuldKesz.asObservable()
+  //kuldKeszErtesit(s:string) { this._kuldKesz.next(s)}
 
   constructor(private http: HttpClient, private _korny: KornyService) { }
 }

@@ -4,13 +4,13 @@
 <div data-Megj="csak hogy meglegyen a színe">
   <button (click)="kuld()">hagymennyen</button>
 </div>
-<app-se-dr *ngIf="_kozos.se && _kozos.se.altip"></app-se-dr>  <!-- kell a _kozos.se && , mert van, hogy még üres -->
-<app-se *ngIf="_kozos.tip=='se'" [azon]="azon"></app-se>
+<app-se-dr *ngIf="_seKozos.se && _seKozos.se.altip"></app-se-dr>  <!-- kell a _seKozos.se && , mert van, hogy még üres -->
+<app-se *ngIf="_kozos.tip=='se'"></app-se>
 <div *ngIf="_kozos.httpValasz.body">
-  <pre>{{valaszStringified()}}</pre>
+  <pre>{{_kozos.stringified(_kozos.httpValasz.body)}}</pre>
 </div>
 <div class="hiba" *ngIf="_kozos.hibauz.status">
   <pre style="white-space: pre-wrap;">{{_kozos.hibauz.error}}</pre>
-  <pre style="white-space: pre-wrap;">{{hibauzStringified()}}</pre>
+  <pre style="white-space: pre-wrap;">{{_kozos.stringified(_kozos.hibauz.status)}}</pre>
 </div>
 
