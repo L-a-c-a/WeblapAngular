@@ -11,8 +11,9 @@ import { Subscription } from 'rxjs'
 })
 export class SeDrAblakComponent implements OnInit 
 {
-  @Input() abl:object   // {azon: valami} , valami = akármi vagy üres (""), a nemüres jelzi, hogy aktuális, és még infót is hordozhat
-  ablAzon:string  //itt még korai abl-ból inicializálni, nincs értéke - ngOnInit-ben kell
+  //@Input() abl:object   // {azon: valami} , valami = akármi vagy üres (""), a nemüres jelzi, hogy aktuális, és még infót is hordozhat
+  //@Input() abl:string   // helyett: csak a kulcs
+  @Input("abl") ablAzon:string  //itt még korai abl-ból inicializálni, nincs értéke - ngOnInit-ben kell
   aktE:boolean    // akkor aktuális, ha nemüres az érték
   //@Input("aktablak") aktAblak:string  //hátha ennek változását észreveszi és frissül  --- nem jött be, ugyanúgy nem frissül, mint _seKozos.aktAblak -tól
   @Output() valtani = new EventEmitter()
@@ -61,11 +62,11 @@ export class SeDrAblakComponent implements OnInit
 
   ngOnInit(): void 
   {
-    this.ablAzon = Object.keys(this.abl)[0]   // az első kulcs az egyből
+    //this.ablAzon = Object.keys(this.abl)[0]   // az első kulcs az egyből
     //this.aktE = !!this.abl[this.ablAzon]    //=="akt" helyett !!  - innentől bármi lehet az érték, pl. a história
     this.aktE = this.ablAzon == this._seKozos.aktAblak
-    /** */console.log("abl:")
-    /** */console.log(this.abl)
+    //** */console.log("abl:")
+    //** */console.log(this.abl)
     //setTimeout(()=>{this.ablakStatusz()})   //így nincs ExpressionChangedAfterItHasBeenCheckedError ***ÚJ DOLOG***
     //setTimeout(this.ablakStatusz)    // így nem műx: this._kozos is undefined (42. (ez) és 21. sor)
     /*

@@ -24,17 +24,30 @@ export class SeKozosService
       /* */console.log("státusz frissítve, hist. akt.: " + this.histAkt + ", hist. hossz.: " + this.histHossz)/* */;console.log("statusz:");console.log(this.statusz)
   }
 
-  ablakok = [] // egy eleme egy egykulcsú objektum; a kulcs egy ablak-azon., az érték vagy "", vagy egy ablakstátusz (ha ez az akt. ablak)
+  //ablakok = [] // egy eleme egy egykulcsú objektum; a kulcs egy ablak-azon., az érték vagy "", vagy egy ablakstátusz (ha ez az akt. ablak)
+  // ez a [] formátum szívás... Object.assign() lesz és {}
+  ablakok = {}
   aktAblak = ""
 
   ablakokFrissit(ablakok:[])
   {
-    this.ablakok = ablakok
+    this.ablakok = Object.assign({}, ...ablakok)
     const aktAblakObj = ablakok.filter(e=>Object.values(e).toString()!="")[0]   //a tömbből az az egy objektum, aminek az értéke nem ""
-    /* */console.log("seKozos.ablakokFrissit: aktAblakObj:"); console.log(aktAblakObj)
+    /* */console.log("seKozos.ablakokFrissit: aktAblakObj:"); console.log(aktAblakObj)  // azért a [] formátum is jó valamire, a {} -ból nem egyszerűbb kiválasztani
     this.aktAblak = Object.keys(aktAblakObj)[0]
     this.statuszFrissit(Object.values(aktAblakObj)[0] as AblakStatuszObj[])
     //this.statuszFrissit(ablakok[this.aktAblak])  hülyeség
+  }
+
+  //korrekció, ha az url-kérés (kuld()) közben megváltozott az akt. ablak azon.-ja, vagy nincs is még aktAblak
+  ablakokKorr()
+  {
+    //if (this.aktAblak == "")
+    {
+      delete this.ablakok[this.aktAblak]
+      this.aktAblak = this.se.egyeb["0"]["abl"]
+      this.ablakok[this.aktAblak] = this.se.egyeb
+    }
   }
 
   constructor(public _kozos: KozosService) { }

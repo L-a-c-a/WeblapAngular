@@ -66,6 +66,19 @@ export class SeDRComponent implements OnInit
     )
   }
 
+  csuk()
+  {
+    this._kozos.httpHivGET
+    ( "drmuv?muv=csuk"
+    , () => {
+              this._seKozos.ablakok = {}
+              this._seKozos.aktAblak = ""
+              this._kozos.tip = "lap"  // se komponens tűnjön el
+              this._seKozos.se.altip = ""   // se-dr komponens tűnjön el
+            }
+    )
+  }
+
   drMuv(muv:string, utana:()=>void = ()=>{})
   {
     //  műveletek RemoteWebDriver-en
@@ -96,6 +109,6 @@ export class SeDRComponent implements OnInit
 
   constructor(private http: HttpClient, private _korny: KornyService, public _kozos: KozosService, public _seKozos: SeKozosService) { }
 
-  ngOnInit(): void { this.ablak() }
+  ngOnInit(): void { /*this.ablak()*/ }
 
 }

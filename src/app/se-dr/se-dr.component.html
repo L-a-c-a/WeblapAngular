@@ -2,12 +2,12 @@
   <div>Selenium böngésző ({{_seKozos.se.altip}})</div>
   <label><input [ngModel]="kepesNyitva" (ngModelChange)="kepesNyitva=$event; kepes($event)" type="checkbox"/> Képességek <code>[{{kepesNyitvaJelzoFn()}}]</code></label>
   <div *ngIf="kepesNyitva">{{_kozos.stringified(kepessegek)}}</div>
-  <app-se-dr-ablak *ngFor="let abl of _seKozos.ablakok; let i = index" [abl]="abl" (valtani)="valt($event)"></app-se-dr-ablak>
-  <!--app-se-dr-ablak *ngFor="let abl of ablakok | keyvalue" [abl]="abl.value" (valtani)="valt($event)"></app-se-dr-ablak-->
+  <!--app-se-dr-ablak *ngFor="let abl of _seKozos.ablakok; let i = index" [abl]="abl" (valtani)="valt($event)"></app-se-dr-ablak-->
+  <app-se-dr-ablak *ngFor="let abl of _seKozos.ablakok | keyvalue" [abl]="abl.key" (valtani)="valt($event)"></app-se-dr-ablak>
   <pre style="color: gray;">{{_kozos.stringified(_seKozos.ablakok)}}</pre>
   <div><button (click)="ablak()">ablakok</button></div>
   <div>
-    <button (click)="drMuv('csuk')">csuk</button>
+    <button (click)="csuk()">csuk</button>
     <button (click)="ujAblak()">új ablak</button>
   </div>
 </div>
