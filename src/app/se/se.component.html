@@ -4,12 +4,6 @@
   <label>Kép<input type="radio" name="semuv" (click)="semuv='kep'"></label>
   <button (click)="frissit('kep')">frissít</button>
 </div>
-<!--
-{{_kozos.se}}
-{{jsonstringify(_kozos.se)}}
-{{'data:image='+_kozos.se['kep']['tip']+';'+_kozos.se['kep']['kodolas']+' '+_kozos.se['kep']['tartalom']}}
-{{imgURL()}}
--->
 <div>
   <iframe [srcdoc]="_seKozos.se.html" *ngIf="semuv=='html'"></iframe>
   <img [src]="imgURL()" *ngIf="semuv=='kep'">

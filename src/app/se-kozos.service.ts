@@ -5,7 +5,7 @@ import { KozosService } from './kozos.service'
 @Injectable({
   providedIn: 'root'
 })
-export class SeKozosService 
+export class SeKozosService //extends KozosService  nem érdemes, messzire vezető következményei vannak
 {
   se:LapValaszObj
 
@@ -16,7 +16,7 @@ export class SeKozosService
   statuszFrissit(statusz: AblakStatuszObj[])    // lap/url (kuld) és drmuv/navig után _kozos.se.egyeb alatt, drmuv/ablakstatusz után a httpValasz.body alatt van a státusz
   {
     this.statusz = statusz
-    this.histAkt = +this.statusz[0].akt //as unknown as number
+    this.histAkt = +this.statusz[0].akt
     if (this.statusz[0].abl) this.aktAblak = this.statusz[0].abl    //van, hogy url-kérés (kuld) során megváltozik az ablak-azon.
       /* */console.log("statusz[0]="+JSON.stringify(this.statusz[0]))
       /* */console.log("Object.keys(this.statusz).length="+Object.keys(this.statusz).length)
@@ -24,8 +24,6 @@ export class SeKozosService
       /* */console.log("státusz frissítve, hist. akt.: " + this.histAkt + ", hist. hossz.: " + this.histHossz)/* */;console.log("statusz:");console.log(this.statusz)
   }
 
-  //ablakok = [] // egy eleme egy egykulcsú objektum; a kulcs egy ablak-azon., az érték vagy "", vagy egy ablakstátusz (ha ez az akt. ablak)
-  // ez a [] formátum szívás... Object.assign() lesz és {}
   ablakok = {}
   aktAblak = ""
 
@@ -36,13 +34,12 @@ export class SeKozosService
     /* */console.log("seKozos.ablakokFrissit: aktAblakObj:"); console.log(aktAblakObj)  // azért a [] formátum is jó valamire, a {} -ból nem egyszerűbb kiválasztani
     this.aktAblak = Object.keys(aktAblakObj)[0]
     this.statuszFrissit(Object.values(aktAblakObj)[0] as AblakStatuszObj[])
-    //this.statuszFrissit(ablakok[this.aktAblak])  hülyeség
   }
 
   //korrekció, ha az url-kérés (kuld()) közben megváltozott az akt. ablak azon.-ja, vagy nincs is még aktAblak
   ablakokKorr()
   {
-    //if (this.aktAblak == "")
+    //if (this.aktAblak == "")    ...de nem kell ez ide
     {
       delete this.ablakok[this.aktAblak]
       this.aktAblak = this.se.egyeb["0"]["abl"]

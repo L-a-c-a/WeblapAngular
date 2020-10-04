@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { KornyService } from '../korny.service'
 import { KozosService } from '../kozos.service'
 import { SeKozosService } from '../se-kozos.service'
@@ -12,11 +12,10 @@ import { HttpClient, HttpResponse, HttpErrorResponse } from '@angular/common/htt
 })
 export class SeComponent implements OnInit 
 {
-  //@Input() azon: string
   semuv = ""
 
-  //jsonstringify(p) { return JSON.stringify(p)}
   imgURL() {return this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/${this._seKozos.se['kep']['tip']};${this._seKozos.se['kep']['kodolas']}, ${this._seKozos.se['kep']['tartalom']}`)}
+
   constructor(private http: HttpClient, private _korny: KornyService, readonly _kozos: KozosService, public _seKozos: SeKozosService, private sanitizer:DomSanitizer) { }
 
   frissit(mit:string) 

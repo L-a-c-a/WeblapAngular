@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { KornyService } from './korny.service'
-import { Subject, BehaviorSubject } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -24,8 +23,6 @@ export class KozosService
 
   httpValasz: HttpResponse<Object> = new HttpResponse<Object>()
   hibauz: HttpErrorResponse = new HttpErrorResponse({})
-  //valaszStringified() { return JSON.stringify(this.httpValasz.body, undefined, 2) }
-  //hibauzStringified() { return JSON.stringify(this.hibauz, undefined, 2) }
 
   stringified(o:object) { return JSON.stringify(o, undefined, 2) }
 
@@ -48,11 +45,6 @@ export class KozosService
     )
 
   }
-
-/*** ÚJ DOLOG */
-  //private _kuldKesz = new /**/BehaviorSubject<string>("semmi");  //ha csak Subject, előszörre nem küldődik el
-  //kuldKesz$ = this._kuldKesz.asObservable()
-  //kuldKeszErtesit(s:string) { this._kuldKesz.next(s)}
 
   constructor(private http: HttpClient, private _korny: KornyService) { }
 }
