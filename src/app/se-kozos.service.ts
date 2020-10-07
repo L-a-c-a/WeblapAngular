@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { LapValaszObj, AblakStatuszObj } from './feszek'
+import { LapValaszObj, AblakStatuszObj, LapAdatokObj } from './feszek'
 import { KozosService } from './kozos.service'
 
 @Injectable({
@@ -13,7 +13,7 @@ export class SeKozosService //extends KozosService  nem érdemes, messzire vezet
   histAkt = 1
   histHossz = 1
 
-  statuszFrissit(statusz: AblakStatuszObj[])    // lap/url (kuld) és drmuv/navig után _kozos.se.egyeb alatt, drmuv/ablakstatusz után a httpValasz.body alatt van a státusz
+  statuszFrissit(statusz: AblakStatuszObj[])    // lap/url (kuld) és drmuv/navig után _kozos.se.lapadatok.ablakstatusz alatt, drmuv/ablakstatusz után a httpValasz.body alatt van a státusz
   {
     this.statusz = statusz
     this.histAkt = +this.statusz[0].akt
@@ -42,8 +42,9 @@ export class SeKozosService //extends KozosService  nem érdemes, messzire vezet
     //if (this.aktAblak == "")    ...de nem kell ez ide
     {
       delete this.ablakok[this.aktAblak]
-      this.aktAblak = this.se.egyeb["0"]["abl"]
-      this.ablakok[this.aktAblak] = this.se.egyeb
+      let lapAdatok: LapAdatokObj = this.se.lapadatok
+      this.aktAblak = lapAdatok.ablakstatusz["0"]["abl"]
+      this.ablakok[this.aktAblak] = lapAdatok
     }
   }
 

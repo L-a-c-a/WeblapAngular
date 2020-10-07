@@ -12,7 +12,7 @@ export interface LapValaszObj
   }
 , tip: string
 , altip: string
-, egyeb?: any
+, lapadatok?: any
 //...?
 }
 
@@ -23,4 +23,9 @@ export interface AblakStatuszObj
 , abl?: string
 }   //vagy url és cim van, vagy akt és abl
 
+export interface LapAdatokObj   // LapValaszObj.lapadatok alatt
+{ linkek?: any
+, kattintanivalok?: any
+, ablakstatusz?: AblakStatuszObj[]
+}
 //lesz itt még talán több is

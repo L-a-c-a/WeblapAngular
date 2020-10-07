@@ -3,7 +3,7 @@ import { KornyService } from '../korny.service'
 import { KozosService } from '../kozos.service'
 import { SeKozosService } from '../se-kozos.service'
 import { HttpClient } from '@angular/common/http';
-import { LapValaszObj } from '../feszek'
+import { LapValaszObj, LapAdatokObj } from '../feszek'
 
 @Component({
   selector: 'app-kuld',
@@ -25,7 +25,8 @@ export class KuldComponent implements OnInit
           this._seKozos.se = this._kozos.httpValasz.body as LapValaszObj
           /** */ console.log(this._seKozos.se)
           this._seKozos.ablakokKorr()
-          this._seKozos.statuszFrissit(this._seKozos.se.egyeb)
+          let lapAdatok: LapAdatokObj = this._seKozos.se.lapadatok
+          this._seKozos.statuszFrissit(lapAdatok.ablakstatusz)
         }
       }
     )

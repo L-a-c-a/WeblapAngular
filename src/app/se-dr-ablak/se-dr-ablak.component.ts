@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { KozosService } from '../kozos.service'
 import { SeKozosService } from '../se-kozos.service'
-import { LapValaszObj, AblakStatuszObj } from '../feszek'
+import { LapValaszObj, AblakStatuszObj, LapAdatokObj } from '../feszek'
 
 @Component({
   selector: 'app-se-dr-ablak',
@@ -30,8 +30,9 @@ export class SeDrAblakComponent implements OnInit
     ( "drmuv?muv=navig&abl="+this.ablAzon+"&delta="+delta
     , () => {
               this._seKozos.se = this._kozos.httpValasz.body as LapValaszObj
-              this._seKozos.statuszFrissit(this._seKozos.se.egyeb)
-              /* */console.log("navig-ban még akt="+this._seKozos.se.egyeb[0].akt)
+              let lapAdatok: LapAdatokObj = this._seKozos.se.lapadatok
+              this._seKozos.statuszFrissit(lapAdatok.ablakstatusz)
+              /* */console.log("navig-ban még akt="+lapAdatok.ablakstatusz[0].akt)
             }
       )
   }
