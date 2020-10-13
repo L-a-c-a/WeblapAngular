@@ -41,7 +41,7 @@ export class KozosService
       { console.log({ uz: "hiba van!", tart: err })
         this.hibauz = err  //kuld komponensben megjelenik
       }
-    , () => console.log({ kiir: "én", tart: "_kozos.httpHivGET lement" })
+    , () => console.log({ kiir: "én", tart: `_kozos.httpHivGET(${relURL}) lement` })
     )
 
   }

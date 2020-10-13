@@ -1,10 +1,28 @@
 <div>
-  <label>Forrás<input type="radio" name="semuv" (click)="semuv='html'"></label>
+  <label>Forrás<input type="radio" name="semuv" (click)="semuv='html'"/></label>
   <button (click)="frissit('html')">frissít</button>
-  <label>Kép<input type="radio" name="semuv" (click)="semuv='kep'"></label>
+  <label>Kép<input type="radio" name="semuv" (click)="semuv='kep'"/></label>
   <button (click)="frissit('kep')">frissít</button>
+  <label>Linkek<input type="radio" name="semuv" (click)="semuv='linkek'"/></label>
+  <button (click)="frissit('linkek')">frissít</button>
 </div>
 <div>
   <iframe [srcdoc]="_seKozos.se.html" *ngIf="semuv=='html'"></iframe>
   <img [src]="imgURL()" *ngIf="semuv=='kep'">
+  <div *ngIf="semuv=='linkek'">
+    <table>
+      <tr>
+        <th>url</th>
+        <th>szöveg</th>
+        <th>új ablakba?</th>
+        <th>nyit</th>
+      </tr>
+      <tr *ngFor="let lnk of _seKozos.se.lapadatok.linkek">
+        <td>{{lnk.absHref}}</td>
+        <td>{{lnk.szoveg}}</td>
+        <td><input type="checkbox" [(ngModel)]="lnk.ujAblakba"/></td>
+        <td><button (click)="nyit(lnk.absHref, lnk.ujAblakba)">nyit</button></td>
+      </tr>
+    </table>
+  </div>
 </div>

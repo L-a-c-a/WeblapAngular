@@ -12,7 +12,7 @@ export interface LapValaszObj
   }
 , tip: string
 , altip: string
-, lapadatok?: any
+, lapadatok?: LapAdatokObj
 //...?
 }
 
@@ -28,4 +28,11 @@ export interface LapAdatokObj   // LapValaszObj.lapadatok alatt
 , kattintanivalok?: any
 , ablakstatusz?: AblakStatuszObj[]
 }
+
+export interface LinkAdatokObj   // LapAdatokObj.linkek alatt
+{ absHref: string
+, ujLapra: boolean
+, szoveg: string
+}
+
 //lesz itt még talán több is
