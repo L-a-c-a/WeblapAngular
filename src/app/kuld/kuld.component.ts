@@ -14,10 +14,10 @@ export class KuldComponent implements OnInit
 {
   @Input() muv: string
 
-  kuld(): void 
+  kuld(ujablak: boolean = false): void 
   {
     this._kozos.httpHivGET
-    ( `${this.muv}?url=${this._kozos.url ? this._kozos.url : ""}&tip=${this._kozos.tip ? this._kozos.tip : ""}`
+    ( `${this.muv}?url=${this._kozos.url ? this._kozos.url : ""}&tip=${this._kozos.tip ? this._kozos.tip : ""}${ujablak ? "&ujablak=true" : ""}`
     , () =>
       {
         if (this._kozos.tip=='se')

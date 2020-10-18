@@ -46,9 +46,9 @@ export class SeComponent implements OnInit
   }
 
   nyit(url:string, ujabl: boolean)
-  {
+  { /** */console.log(`nyit: url=${url} , ujabl=${ujabl}`)
     this._kozos.url = url
-    this.kuldeni.emit()
+    this.kuldeni.emit(ujabl)
   }
   
 
