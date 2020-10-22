@@ -20,10 +20,10 @@ export class SeComponent implements OnInit
 
   constructor(private http: HttpClient, private _korny: KornyService, readonly _kozos: KozosService, public _seKozos: SeKozosService, private sanitizer:DomSanitizer) { }
 
-  frissit(mit:string)
+  frissit(mit:string, par?:string)
   {
     this._kozos.httpHivGET
-    ( `lapmuv?azon=${this._seKozos.se.azon ? this._seKozos.se.azon : ""}&frissitendo=${mit}`
+    ( `lapmuv?azon=${this._seKozos.se.azon ? this._seKozos.se.azon : ""}&frissitendo=${mit}${par ? "&par="+par : ""}`
     , () =>
       {
         let v:LapValaszObj = this._kozos.httpValasz.body as LapValaszObj

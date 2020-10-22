@@ -19,7 +19,7 @@ export class SeDrAblakComponent implements OnInit
     this._kozos.httpHivGET
     ( "drmuv?muv=ablakstatusz&abl="+this.ablAzon
     , () => {
-              this._seKozos.statuszFrissit(this._kozos.httpValasz.body as AblakStatuszObj[])
+              this._seKozos.statuszFrissit(this._kozos.httpValasz.body as AblakStatuszObj)
             }
     )
   }
@@ -31,8 +31,8 @@ export class SeDrAblakComponent implements OnInit
     , () => {
               this._seKozos.se = this._kozos.httpValasz.body as LapValaszObj
               let lapAdatok: LapAdatokObj = this._seKozos.se.lapadatok
-              this._seKozos.statuszFrissit(lapAdatok.ablakstatusz)
-              /* */console.log("navig-ban még akt="+lapAdatok.ablakstatusz[0].akt)
+              this._seKozos.ablakokFrissit(lapAdatok.ablakok)
+              //* */console.log("navig-ban még akt="+lapAdatok.ablakok[0].akt)
             }
       )
   }

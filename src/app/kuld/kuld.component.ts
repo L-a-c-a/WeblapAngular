@@ -24,9 +24,10 @@ export class KuldComponent implements OnInit
         {
           this._seKozos.se = this._kozos.httpValasz.body as LapValaszObj
           /** */ console.log(this._seKozos.se)
-          this._seKozos.ablakokKorr()
-          let lapAdatok: LapAdatokObj = this._seKozos.se.lapadatok
-          this._seKozos.statuszFrissit(lapAdatok.ablakstatusz)
+          //this._seKozos.ablakokKorr()
+          //let lapAdatok: LapAdatokObj = this._seKozos.se.lapadatok
+          //this._seKozos.statuszFrissit(lapAdatok.ablakstatusz)
+          this._seKozos.ablakokFrissit(this._seKozos.se.lapadatok.ablakok)
         }
       }
     )

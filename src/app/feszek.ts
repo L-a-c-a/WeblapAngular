@@ -23,10 +23,21 @@ export interface AblakStatuszObj
 , abl?: string
 }   //vagy url és cim van, vagy akt és abl
 
+/* nem jó
+export interface KiserletiAblakStatuszObj
+{ nulla              : {url: string, cim:string}
+, [histindex: number]: {akt: string, abl: string}
+}
+//*/
+
+export interface AblakObj { [histindex: number]: AblakStatuszObj }
+
+export interface AblakokObj{ [ablakazon: string]: AblakObj }
+
 export interface LapAdatokObj   // LapValaszObj.lapadatok alatt
 { linkek?: any
 , kattintanivalok?: any
-, ablakstatusz?: AblakStatuszObj[]
+, ablakok?: AblakokObj[]   //itt (ahogy átjön) tömb, a benne levő AblakokObj-ok csak egy-egy ablakról szólnak
 }
 
 export interface LinkAdatokObj   // LapAdatokObj.linkek alatt
